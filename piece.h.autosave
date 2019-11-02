@@ -1,0 +1,43 @@
+#ifndef PIECE_H
+#define PIECE_H
+
+#include <vector>
+#include <QPoint>
+#include "mainwindow.h"
+#include "createpiece.h"
+
+using std::vector;
+using std::pair;
+class QPoint;
+
+class piece
+{
+    friend class createPiece;
+protected:
+    explicit piece(bool (&isPiece)[13][13][2]);
+    virtual ~piece()=0;
+    int blackSituation[13][13][5];
+    int whiteSituation[13][13][5];
+    vector<pair<int,int> > emptyBoard=vector<pair<int,int> >(0);
+    int x=0;
+    int y=0;
+    int times=1;
+    QPoint point;
+    QPoint countScore(bool (&isPiece)[13][13][2]);
+    bool copyIsPiece[13][13][2];
+    void bTransScore(bool (&isPiece)[13][13][2]);
+    void bStraiScore(bool (&isPiece)[13][13][2]);
+    void bSlashScore(bool (&isPiece)[13][13][2]);
+    void bBackSlashScore(bool (&isPiece)[13][13][2]);
+    void wTransScore(bool (&isPiece)[13][13][2]);
+    void wStraiScore(bool (&isPiece)[13][13][2]);
+    void wSlashScore(bool (&isPiece)[13][13][2]);
+    void wBackSlashScore(bool (&isPiece)[13][13][2]);
+    void checkWin(bool (&isPiece)[13][13][2],MainWindow *const &parent,bool isPlayer,int color);
+    bool isTransWin(bool (&isPiece)[13][13][2],int color);
+    bool isStraiWin(bool (&isPiece)[13][13][2],int color);
+    bool isSlashWin(bool (&isPiece)[13][13][2],int color);
+    bool isBackSlashWin(bool (&isPiece)[13][13][2],int color);
+};
+
+#endif // PIECE_H
